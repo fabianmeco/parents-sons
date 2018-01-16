@@ -1,0 +1,28 @@
+{
+  "name": "parents-sons",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabianmeco/parents-sons.git"
+  },
+  "author": "Fabian Mendoza <yessid.mendoza@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fabianmeco/parents-sons/issues"
+  },
+  "homepage": "https://github.com/fabianmeco/parents-sons#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "joi": "12.x.x",
+    "knex": "^0.14.2",
+    "pg": "^7.4.1",
+    "sqlite3": "^3.1.13"
+  }
+}

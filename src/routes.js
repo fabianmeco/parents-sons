@@ -3,6 +3,6 @@ const router = express.Router();
 
 const people = require('./parent');
 
-router.use('/people', people);
+router.use('/parent', people);
 
 module.exports = router;

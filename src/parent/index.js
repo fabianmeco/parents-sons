@@ -8,7 +8,7 @@ const parentController = require('./parent.controller');
 const children = require('../child');
 
 
-router.post('/', middlewares.validateBody(parentValidator.post), parentController.post);
+router.post('/', parentController.post);
 
 router.get('/', parentController.get);
 
@@ -20,6 +20,6 @@ instanceRouter.put('/', parentController.put);
 
 instanceRouter.delete('/', parentController.delete);
 
-/* instanceRouter.use('/child', children); */
+instanceRouter.use('/child', children);
 
 module.exports = router;

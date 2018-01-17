@@ -20,6 +20,6 @@ instanceRouter.put('/', parentController.put);
 
 instanceRouter.delete('/', parentController.delete);
 
-instanceRouter.use('/child', children);
+/* instanceRouter.use('/child', children); */
 
 module.exports = router;

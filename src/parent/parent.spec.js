@@ -15,6 +15,26 @@ describe('Parent', function(){
                 should.not.exist(err);                
                 done();
             })
+        });
+        it('Shouldn\'t create a parent with duplicated nit', function(done){
+            chai.request(app)
+            .post('/parent')
+            .send(fixtures.post.parentDuplicatedNit)
+            .end(function(err, res){
+                should.exist(err);
+                expect(res).to.have.status(422)
+                done();
+            })
+        });
+        it('Shouldn\'t create a parent with more than 60 years', function(done){
+            chai.request(app)
+            .post('/parent')
+            .send(fixtures.post.overaged)
+            .end(function(err, res){
+                should.exist(err);
+                expect(res).to.have.status(422);
+                done();
+            })
         })
     })    
 }) 

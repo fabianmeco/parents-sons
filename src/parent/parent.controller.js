@@ -5,7 +5,7 @@ exports.post = function (req, res) {
     return parentModel.find({ nit: req.body.nit })
         .then(function (found) {
             if (found) {
-                return res.status(422).send([{ "name": "nit", "message": "Nit already registered" }]);
+                return res.status(422).send([{ name: "nit", message: "Nit already registered" }]);
             }
             return parentModel.create(req.body)
                 .then(parent => res.json(parent))
@@ -16,7 +16,7 @@ exports.post = function (req, res) {
 exports.get = function (req, res) {
     return parentModel.findAll({})
         .then(values => res.json(values))
-        .catch(err => res.status(500).send({ "name": "Internal error", "message": err.message }));
+        .catch(err => res.status(500).send({ name: "Internal error", message: err.message }));
 }
 
 exports.getOneMiddleware = function (req, res, next) {

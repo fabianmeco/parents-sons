@@ -20,7 +20,7 @@ exports.get = function (req, res) {
 }
 
 exports.getOneMiddleware = function (req, res, next) {
-    return parentModel.find(req.params.id)
+    return parentModel.find(req.params.person_id)
         .then(found => {
             if (found) {
                 req.parent = found;

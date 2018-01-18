@@ -12,7 +12,7 @@ router.post('/', parentController.post);
 
 router.get('/', parentController.get);
 
-router.get('/:person_id', parentController.getOneMiddleware, instanceRouter);
+router.use('/:person_id', parentController.getOneMiddleware, instanceRouter);
 
 instanceRouter.get('/', parentController.getOne);
 

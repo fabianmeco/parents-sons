@@ -1,5 +1,6 @@
 
 const parentModel = require('./parent.model');
+const childModel = require('../child/child.model');
 
 exports.post = function (req, res) {
     return parentModel.find({ nit: req.body.nit })
@@ -20,7 +21,7 @@ exports.get = function (req, res) {
 }
 
 exports.getOneMiddleware = function (req, res, next) {
-    return parentModel.find(req.params.person_id)
+    return parentModel.find(JSON.parse(req.params.person_id))
         .then(found => {
             if (found) {
                 req.parent = found;
@@ -32,7 +33,11 @@ exports.getOneMiddleware = function (req, res, next) {
 }
 
 exports.getOne = function (req, res) {
-    return res.json(req.parent)
+    return childModel.findAll({parentId:req.parent.id})
+        .then(children =>{ 
+            req.parent.children = children;
+            return res.json(req.parent)
+        })
 }
 
 exports.put = function (req, res) {

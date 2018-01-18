@@ -8,7 +8,7 @@ const parentController = require('./parent.controller');
 const children = require('../child');
 
 
-router.post('/', parentController.post);
+router.post('/',  parentController.post);
 
 router.get('/', parentController.get);
 

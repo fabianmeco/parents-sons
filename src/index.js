@@ -14,4 +14,6 @@ app.use(body.urlencoded({extended:false}));
 
 app.use('/', router);
 
+app.use(express.static('uploads'));
+
 module.exports = app;

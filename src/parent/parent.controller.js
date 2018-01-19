@@ -21,11 +21,11 @@ exports.get = function (req, res) {
 }
 
 exports.getOneMiddleware = function (req, res, next) {
-    return parentModel.find({id: req.params.person_id})
+    return parentModel.find({ id: req.params.person_id })
         .then(found => {
             if (found) {
                 req.parent = found;
-                
+
                 return next();
             }
             return res.status(404);
@@ -34,16 +34,29 @@ exports.getOneMiddleware = function (req, res, next) {
 }
 
 exports.getOne = function (req, res) {
-    return childModel.findAll({parentId : req.parent.id})
-        .then(children =>{ 
+    return childModel.findAll({ parentId: req.parent.id })
+        .then(children => {
             req.parent.children = children;
-            console.log(req.parent);
             return res.json(req.parent)
         })
         .catch(err => res.status(500).send([{ name: "Internal error", message: err.message }]))
 }
 exports.put = function (req, res) {
-
+    if (req.file) {
+        req.body.photo = req.file.path;
+    }
+    return parentModel.update(req.parent.id, req.body)
+        .then(value => {
+            return parentModel.find({id: req.parent.id})
+                .then(parentFound => {
+                    req.parent = parentFound;
+                    return childModel.findAll({ parentId: req.parent.id })
+                        .then(children => {
+                            req.parent.children = children;
+                            return res.json(req.parent)
+                        })
+                })
+        }).catch(err => res.status(500).send([{ name: "Internal error", message: err.message }]))
 }
 
 exports.delete = function (req, res) {

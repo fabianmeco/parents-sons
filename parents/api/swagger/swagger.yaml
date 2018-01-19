@@ -24,7 +24,7 @@ paths:
     get:
       description: Returns the list of parents
       # used as the method name of the controller
-      operationId: hello
+      operationId: parent
       parameters:
         - name: where
           in: query

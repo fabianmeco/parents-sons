@@ -1,22 +1,34 @@
 
 const express = require('express');
-const router = express.Router();
-const instanceRouter = express.Router();
+const config = require('config');
+const multer = require('multer');
+const aws = require('aws-sdk');
+const multers3 = require('multer-s3');
+const mime = require('mime');
+
 const parentValidator = require('./parent.validator');
 const middlewares = require('../middlewares');
 const parentController = require('./parent.controller');
 const children = require('../child');
-const multer = require('multer');
-const storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, './uploads/images/')
-    },
-    filename: function(req, file, cb){
-        cb(null, file.fieldname + '-' + req.parent.nit + '.jpg')
-    }
-})
-const uploads = multer({storage: storage});
 
+const router = express.Router();
+const instanceRouter = express.Router();
+
+const s3 = new aws.S3(config.s3);
+
+
+const uploads = multer({
+    storage: multers3({
+        s3: s3,
+        bucket: 'fabianparentsfiles',                
+        metadata: function(req, file, cb){
+            cb(null, {fieldname: file.fieldname})
+        },
+        key: function(req, file, cb){
+            cb(null, 'images/'+Date.now().toString()+'.'+mime.getExtension(file.mimetype))
+        }
+    })
+})
 
 router.post('/', parentController.post);
 

@@ -43,20 +43,22 @@ exports.getOne = function (req, res) {
 }
 exports.put = function (req, res) {
     if (req.file) {
-        req.body.photo = req.file.path;
+        req.body.photo = req.file.location;       
     }
     return parentModel.update(req.parent.id, req.body)
         .then(value => {
-            return parentModel.find({id: req.parent.id})
-                .then(parentFound => {
-                    req.parent = parentFound;
-                    return childModel.findAll({ parentId: req.parent.id })
-                        .then(children => {
-                            req.parent.children = children;
-                            return res.json(req.parent)
-                        })
-                })
-        }).catch(err => res.status(500).send([{ name: "Internal error", message: err.message }]))
+            return parentModel.find({id: req.parent.id})               
+        })
+        .then(parentFound => {
+            req.parent = parentFound;
+            return childModel.findAll({ parentId: req.parent.id })
+                
+        })
+        .then(children => {
+            req.parent.children = children;
+            return res.json(req.parent)
+        })
+        .catch(err => res.status(500).send([{ name: "Internal error", message: err.message }]))
 }
 
 exports.delete = function (req, res) {

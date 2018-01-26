@@ -25,7 +25,7 @@ Parent.deleteAll = function(){
 }
 
 Parent.update = function(id, bodyParent){
-    return knex('parents').update(bodyParent).where({id:id})
+    return knex('parents').where({id:id}).update(bodyParent)
 }
 
 module.exports = Parent;

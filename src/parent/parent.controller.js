@@ -1,6 +1,10 @@
 
 const parentModel = require('./parent.model');
 const childModel = require('../child/child.model');
+const multer = require('multer');
+const upload = multer({dest: `uploads/`});
+
+
 
 exports.post = function (req, res) {
     return parentModel.find({ nit: req.body.nit })
@@ -15,7 +19,7 @@ exports.post = function (req, res) {
 }
 
 exports.get = function (req, res) {
-    return parentModel.findAll({})
+    return parentModel.findAll()
         .then(values => res.json(values))
         .catch(err => res.status(500).send({ name: "Internal error", message: err.message }));
 }
@@ -37,13 +41,12 @@ exports.getOne = function (req, res) {
     return childModel.findAll({parentId : req.parent.id})
         .then(children =>{ 
             req.parent.children = children;
-            console.log(req.parent);
             return res.json(req.parent)
         })
         .catch(err => res.status(500).send([{ name: "Internal error", message: err.message }]))
 }
 exports.put = function (req, res) {
-
+    console.log(req.files);    
 }
 
 exports.delete = function (req, res) {

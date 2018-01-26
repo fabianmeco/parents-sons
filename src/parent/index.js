@@ -6,6 +6,8 @@ const parentValidator = require('./parent.validator');
 const middlewares = require('../middlewares');
 const parentController = require('./parent.controller');
 const children = require('../child');
+const multer = require('multer');
+
 
 
 router.post('/',  parentController.post);
@@ -16,7 +18,7 @@ router.use('/:person_id', parentController.getOneMiddleware, instanceRouter);
 
 instanceRouter.get('/', parentController.getOne);
 
-instanceRouter.put('/', parentController.put);
+instanceRouter.put('/', multer({ dest: './uploads/' }).any(), parentController.put);
 
 instanceRouter.delete('/', parentController.delete);
 

@@ -5,10 +5,10 @@ Parent.create = function(bodyParent){
     return knex('parents').insert(bodyParent);
 }
 
-Parent.findAll = function(query){
-    /* const basicQuery = knex.select('*').from('parents')    
-    //receive array formated to execute the query  [fieldName, operator, comparator] to filter overdue, this come from the front
-    return basicQuery.where.apply(basicQuery, overdue) */
+Parent.findAll = function(query, limit, offset){
+   if(limit){
+        return knex.select('*').from('parents').where(query).limit(limit).offset(offset);   
+   }
     return knex.select('*').from('parents').where(query);
 }
 

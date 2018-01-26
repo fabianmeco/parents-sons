@@ -1,0 +1,15 @@
+{
+    "s3": {
+        "region": "us-east-2",
+        "sslEnabled": false,
+        "s3ForcePathStyle": true
+    },
+    "database": {
+        "client": "pg",
+        "searchPath": "public",
+        "pool": {
+            "min": 2,
+            "max": 10
+        }
+    }
+}

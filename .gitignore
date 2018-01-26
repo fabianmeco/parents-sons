@@ -57,5 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
-!.gitkeep
 config/**/*
+!config/default.json
+!config/custom-environment-variables.json
+
+!.gitkeep
+projectfiles/**/*

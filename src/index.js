@@ -6,10 +6,12 @@ const cors = require('cors');
 const app = express();
 
 const router = require('./routes');
-const loop = require('./loop')
+const loopUpload = require('./uploadFile')
 
 
 app.listen(3000, function(){console.log('App listening on port 3000')});
+
+const uploadFile = setInterval(()=>loopUpload.loopUploadFile(), 300000);
 
 app.use(cors());
 
@@ -21,6 +23,6 @@ app.use('/', router);
 
 app.use(express.static('uploads'));
 
-const uploadFile = setTimeout(()=>{console.log("works")}, 3000);
+
 
 module.exports = app;

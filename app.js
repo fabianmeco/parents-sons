@@ -2,14 +2,15 @@
 const express = require('express');
 const body = require('body-parser');
 const cors = require('cors');
+const config = require('config')
 
 const app = express();
 
-const router = require('./routes');
-const loopUpload = require('./uploadFile')
+const router = require('./src/routes');
+const loopUpload = require('./src/uploadFile')
 
 
-app.listen(3000, function(){console.log('App listening on port 3000')});
+app.listen(config.serverport, function(){console.log('App listening on port '+config.serverport)});
 
 const uploadFile = setInterval(()=>loopUpload.loopUploadFile(), 300000);
 

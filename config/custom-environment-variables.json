@@ -6,6 +6,7 @@
     },
     "database":{
         "connection": "PG_CONNECTION_URL"        
-    }
+    },
+    "serverport": "PORT"
 
  }

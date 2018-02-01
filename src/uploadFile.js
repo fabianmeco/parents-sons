@@ -10,20 +10,20 @@ const forecst = new forecast({
     units: 'celcius'
 });
 
-exports.loopUploadFile = function(req, res){
+exports.loopUploadFile = function(){
     let key = 'projectfiles/'+Date.now().toString()+'.txt'
     forecst.get([7.8942, -72.5039], true, function(err, weather){
         if(err){
-            return res.status(500).send([{ name: "Internal error", message: err.message }])
+            console.log(err)            
         }
-        fs.writeFile(key, JSON.stringify(weather), (err)=>{
-            if(err){
-                return res.status(500).send([{ name: "Internal error", message: err.message }])
+        fs.writeFile(key, JSON.stringify(weather), (error)=>{
+            if(error){
+                console.log(error)
             }
             fs.readFile(key, function(err, data){
-                s3.putObject({Key: key, Body: data, Bucket: 'fabianparentsfiles'}, function(err, value){
-                    if(err){
-                        return res.status(500).send([{ name: "Internal error", message: err.message }])
+                s3.putObject({Key: key, Body: data, Bucket: 'fabianparentsfiles'}, function(errore, value){
+                    if(errore){
+                        console.log(errore)
                     }
                     console.log('uploaded')
                 })

@@ -2,7 +2,7 @@
   "name": "parents-sons",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "app.js",
   "scripts": {
     "test": "mocha --exit ./src/**/*.spec.js"
   },
